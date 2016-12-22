@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 /**
- * Guess The Number is a simple game utilising a single class
+ * Guess The Number is a simple game utilising a single class.
  * 
  * @author wmccormack
  *
@@ -12,6 +12,7 @@ import java.util.Random;
 public class PrimaryClass {
 
 	public static Scanner myScanner = new Scanner(System.in);
+	public static int GUESS_RANGE = 10;
 
 	public PrimaryClass() {
 		// TODO Auto-generated constructor stub
@@ -55,7 +56,7 @@ public class PrimaryClass {
 
 		switch (userChoice) {
 		case 1:
-			playGame();
+			playGame(GUESS_RANGE);
 			break;
 		case 2:
 			instructions();
@@ -70,30 +71,29 @@ public class PrimaryClass {
 
 	}
 
-	public static void playGame() {
+	public static void playGame(int GUESS_RANGE) {
 		int userGuess;
 		int attempts;
-		attempts = 0;
+		int loop;
+		loop = 0;
 		Random randomNumber = new Random();
-		int myRandomNumber = randomNumber.nextInt(10);
+		int myRandomNumber = randomNumber.nextInt(GUESS_RANGE);
 		myRandomNumber++;
 		System.out.println();
-		System.out.println("guess a number between 1 and 10");
+		System.out.println("how many guesses would you like?");
+		attempts = myScanner.nextInt();
+		System.out.println("ok cool. guess a number between 1 and " + GUESS_RANGE);
 
 		do {
-
-			attempts++;
+			loop++;
 
 			userGuess = myScanner.nextInt();
 
-			if (attempts == 4) {
-				System.out.println("too many attempts. you lose!");
-				System.out.println("the number was " + myRandomNumber);
-			} else if (userGuess == myRandomNumber) {
+			if (userGuess == myRandomNumber) {
 				System.out.println("correct!");
 			} else if ((userGuess++ == myRandomNumber) || (userGuess-- == myRandomNumber)) {
 				System.out.println("close... try again");
-			} else if (attempts == 3) {
+			} else if (loop == attempts) {
 				System.out.println("you lose!");
 				System.out.println("the number was " + myRandomNumber);
 			} else
@@ -106,16 +106,15 @@ public class PrimaryClass {
 	public static void instructions() {
 		int instructionsChoice;
 
-		System.out.println("-------------------------");
-		System.out.println("-------------------------");
-		System.out.println("-------------------------");
+		System.out.println("---------------------------------------");
+		System.out.println("---------------------------------------");
+		System.out.println("---------------------------------------");
 		System.out.println("guess the number is really simple");
 		System.out.println("just guess what number I am thinking of");
 		System.out.println("i will tell you when are getting closer");
-		System.out.println("but you only have 3 guesses");
-		System.out.println("-------------------------");
-		System.out.println("-------------------------");
-		System.out.println("-------------------------");
+		System.out.println("---------------------------------------");
+		System.out.println("---------------------------------------");
+		System.out.println("---------------------------------------");
 		System.out.println();
 		System.out.println();
 		System.out.println("         1. play        ");
@@ -124,7 +123,7 @@ public class PrimaryClass {
 
 		switch (instructionsChoice) {
 		case 1:
-			playGame();
+			playGame(GUESS_RANGE);
 			break;
 		case 2:
 			System.out.println("exiting ...");
