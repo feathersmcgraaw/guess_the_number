@@ -66,7 +66,8 @@ public class PrimaryClass {
 			myScanner.close();
 			break;
 		default:
-
+			System.out.println("I didn't understand that choice.. try again");
+			userOptions();
 		}
 
 	}
